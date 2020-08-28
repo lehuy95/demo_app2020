@@ -1,0 +1,11 @@
+<% if logged_in? %>
+	<%= form_for(@comment) do |f| %>
+	   <p>
+	     <%= f.text_area :content, :placeholder => "Leave a comment" %>
+	   </p>
+	   <p>
+	     <%= f.hidden_field :micropost_id, value: @comment.micropost_id %>
+	   </p>
+	    <%= f.submit %>
+	<% end %>
+<% end %>

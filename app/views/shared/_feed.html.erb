@@ -1,6 +1,10 @@
-<% if @feed_items.any? %>
-	<ol class="microposts">
-		<%= render @feed_items %>
-	</ol>
-	<%= will_paginate @feed_items, params: { controller: :demo_apps, action: :home } %>
+<% if logged_in? %>
+	<% if @feed_items.any? %>
+		<ol class="microposts">
+			<%= render @feed_items %>
+		</ol>
+		<%= will_paginate @feed_items, params: { controller: :demo_apps, action: :home } %>
+	<% end %>
+<% else %>
+	<%= render Micropost.all %>
 <% end %>

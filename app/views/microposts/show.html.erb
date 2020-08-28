@@ -1,0 +1,24 @@
+<% provide(:title, @micropost.content) %>
+<center><%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %></center>
+<span class="user"><%= link_to @micropost.user.name, @micropost.user %></span>
+<div class="row">
+	<aside class="col-md-4">
+		<section>
+			<h1>
+				:<%= @micropost.content %>
+			</h1>
+			<%= image_tag @micropost.display_image if @micropost.image.attached? %>
+		</section>
+		<%= render 'shared/comment_form' %>
+	</aside>
+	<div class="col-md-8">
+		<% if @micropost.comments.any? %>
+			<h3>comment</h3>
+			<%= @micropost.comments.count %>
+			<ol class="microposts">
+				<%= render @comments %>
+			</ol>
+			<%= will_paginate @comments %>
+		<% end %>
+	</div>
+</div>

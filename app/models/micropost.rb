@@ -1,5 +1,6 @@
 class Micropost < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
   has_one_attached :image
   scope :order_by_time, -> {order(created_at: :desc)}
   validates :user_id, presence: true
@@ -11,4 +12,8 @@ class Micropost < ApplicationRecord
 	def display_image
 		image.variant(resize_to_limit: [500, 500])
 	end
+
+  def feed_comment
+    self.comments
+  end
 end
